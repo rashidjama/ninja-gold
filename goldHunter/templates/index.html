@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ninja Gold</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+<body>
+    <a href="/reset"><button class="btn btn-danger m-5 text-white
+      ">Resest</button></a>
+      Your Gold: <span class="border pt-2 pb-2 pr-4 pl-4">{{request.session.gold}}</span>
+  <div class="container ml-4 row">
+    <div class="card text-center col-md-3">
+      <div class="card-body">
+      <h4 class="card-title">Farm</h4>
+      <p>(earns 10-20 golds)</p>
+      <form action="/process" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="place" value="farm">
+        <button class="btn btn-primary">Find Gold</button>
+      </form>
+      </div>
+    </div>
+
+    <div class="card text-center col-md-3">
+      <div class="card-body">
+      <h4 class="card-title">Cave</h4>
+      <p>(earns 5-10 golds)</p>
+      <form action="/process" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="place" value="cave">
+        <button class="btn btn-primary">Find Gold</button>
+      </form>
+      </div>
+    </div>
+    <div class="card text-center col-md-3">
+      <div class="card-body">
+      <h4 class="card-title">House</h4>
+      <p>(earns 2-5 golds)</p>
+      <form action="/process" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="place" value="house">
+        <button class="btn btn-primary">Find Gold</button>
+      </form>
+      </div>
+    </div>
+    <div class="card text-center col-md-3">
+      <div class="card-body">
+      <h4 class="card-title">Casino</h4>
+      <p>(earns 0-50 golds)</p>
+      <form action="/process" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="place" value="casino">
+        <button class="btn btn-danger">Find Gold</button>
+      </form>
+    </div>
+    </div>
+    <div class="activities">
+      <h4 class="card-title mt-3">activities</h4>
+      <p class="lead">Earned {{request.session.farm_gold}} golds from the farm! {{request.session.dateTime}}</p>
+      <p class="lead">Earned {{request.session.cave_gold}} golds from the cave! {{request.session.dateTime}}</p>
+      <p class="lead">Earned  {{request.session.house_gold}} golds from the house! {{request.session.dateTime}}</p>
+      <p class="lead text-danger">Entered a casino and lost {{request.session.casino_gold}} golds...ouch..! {{request.session.dateTime}}</p>
+    </div>
+  </div>
+  
+</body>
+</html>
